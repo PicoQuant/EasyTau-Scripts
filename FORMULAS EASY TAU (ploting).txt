@@ -1,0 +1,58 @@
+Emission scan:
+-Spectrum=crv[0]*(crv[1]/10000) precision = 1;
+
+Emission Anisotropy:
+-G=crv[2]/crv[3] precision = 3;
+-r=(crv[0]-G*crv[1])/(crv[0]+2*G*crv[1]) precision = 1;
+
+Excitation spectrum
+-Spectrum=crv[0]/(crv[1]*(crv[2]/10000)) precision = 1;
+
+Excitation Anisotropy
+G=(324150.0)/(359880.0) precision=3;{measured intensities HV/HH}
+r=(crv[0]-G*crv[2])/(crv[0]+2*G*crv[2]);
+
+
+QUANTUM YIELD laser;
+F=1e9;
+Lex1 = 480;
+Lex2 = 520;
+Lem1 = 520;
+Lem2 = 680;
+Spectrum1 = crv[0] * (crv[1]/10000) precision = 1;
+Spectrum2 = crv[2] * (crv[3]/10000) precision = 1;
+Abs = Spectrum1- Spectrum2;
+Ems = Spectrum2- Spectrum1;
+Absorption = F*integral(Abs from Lex1*1/F to Lex2*1/F);
+Emission = F*integral(Ems from Lem1*1/F to Lem2*1/F);
+QY = 100*(Emission/Absorption) precision = 2;
+Trans = 100*(integral(Spectrum2 from Lex1*1/F to Lex2*1/F)/integral(Spectrum1 from Lex1*1/F to Lex2*1/F))precision = 2;
+
+
+
+QUANTUM YIELD Xe lamp;
+Lex1 = 485;
+Lex2 = 552;
+Lem1 = 550;
+Lem2 = 730;
+Spectrum1 = crv[0] * (crv[1]/10000) precision = 1;
+Spectrum2 = crv[3] * (crv[4]/10000) precision = 1;
+Abs = Spectrum1- Spectrum2;
+Ems = Spectrum2- Spectrum1;
+Absorption = 1e9*integral(Abs from Lex1*1e-9 to Lex2*1e-9);
+Emission = 1e9*integral(Ems from Lem1*1e-9 to Lem2*1e-9);
+QY = 100*(Emission/Absorption) precision = 2;
+Trans = 100*(integral(Spectrum2 from Lex1*1e-9 to Lex2*1e-9)/integral(Spectrum1 from Lex1*1e-9 to Lex2*1e-9))precision = 2;
+
+
+
+
+Normalization
+
+correct = crv[2];
+Norm1 = crv[0] / correct;
+Norm2 = crv[1] / correct;
+Norm3 = crv[2] / correct;
+Norm4 = crv[3] / correct;
+Norm5 = crv[4] / correct;
+Norm6 = crv[5] / correct;

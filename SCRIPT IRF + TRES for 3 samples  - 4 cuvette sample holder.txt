@@ -1,0 +1,106 @@
+{ IRF + TRES of 3 samples with a 4 cuvette sample holder FT300 }
+
+def
+   wl : Float;
+
+exec
+
+{ First sample, choose name and solvent }
+
+   Sample="C6";
+   Solvent="Methanol";
+
+{ Define IRF conditions }
+   DETECTOR_1.DETShutterPos=FALSE;
+   SAMPLE_CHANGER.SMPPos=4;
+   DETECTION_FILTER.ACTPos=1;
+   EXCITATION_ATTENUATOR.ACTPos=3;
+   DETECTION_ATTENUATOR.ACTPos=20;
+   DETECTION_MONO.MCRGratingWavelength=439.4E-9;
+   DETECTION_MONO.MCRSC4Bandwidth=5E-9;
+   DETECTOR_1.DETShutterPos=TRUE;
+   Histogram(-1,10000);
+   DETECTOR_1.DETShutterPos=FALSE;
+
+{ Define Sample conditions }
+   DETECTOR_1.DETShutterPos=FALSE;
+   SAMPLE_CHANGER.SMPPos=1;
+   DETECTION_FILTER.ACTPos=3;
+   EXCITATION_ATTENUATOR.ACTPos=4;
+   DETECTION_ATTENUATOR.ACTPos=40;
+for wl=480 to 580 step 50
+   DETECTION_MONO.MCRSC4Bandwidth=10E-9;
+   DETECTOR_1.DETShutterPos=TRUE;
+   DETECTION_MONO.MCRGratingWavelength=wl*1E-9;
+   Histogram(-1,10000);
+   DETECTOR_1.DETShutterPos=FALSE;
+end;
+
+
+{ Second sample, choose name and solvent }
+
+   Sample="C6";
+   Solvent="Ethanol";
+
+{ Define IRF conditions }
+   DETECTOR_1.DETShutterPos=FALSE;
+   SAMPLE_CHANGER.SMPPos=4;
+   DETECTION_FILTER.ACTPos=1;
+   EXCITATION_ATTENUATOR.ACTPos=3;
+   DETECTION_ATTENUATOR.ACTPos=20;
+   DETECTION_MONO.MCRGratingWavelength=439.4E-9;
+   DETECTION_MONO.MCRSC4Bandwidth=5E-9;
+   DETECTOR_1.DETShutterPos=TRUE;
+   Histogram(-1,10000);
+   DETECTOR_1.DETShutterPos=FALSE;
+
+{ Define Sample conditions }
+   DETECTOR_1.DETShutterPos=FALSE;
+   SAMPLE_CHANGER.SMPPos=2;
+   DETECTION_FILTER.ACTPos=3;
+   EXCITATION_ATTENUATOR.ACTPos=4;
+   DETECTION_ATTENUATOR.ACTPos=40;
+for wl=480 to 580 step 50
+   DETECTION_MONO.MCRSC4Bandwidth=10E-9;
+   DETECTOR_1.DETShutterPos=TRUE;
+   DETECTION_MONO.MCRGratingWavelength=wl*1E-9;
+   Histogram(-1,10000);
+   DETECTOR_1.DETShutterPos=FALSE;
+end;
+
+
+
+
+{ Third sample, choose name and solvent }
+
+   Sample="C6";
+   Solvent="Propanol";
+
+{ Define IRF conditions }
+   DETECTOR_1.DETShutterPos=FALSE;
+   SAMPLE_CHANGER.SMPPos=4;
+   DETECTION_FILTER.ACTPos=1;
+   EXCITATION_ATTENUATOR.ACTPos=3;
+   DETECTION_ATTENUATOR.ACTPos=20;
+   DETECTION_MONO.MCRGratingWavelength=439.4E-9;
+   DETECTION_MONO.MCRSC4Bandwidth=5E-9;
+   DETECTOR_1.DETShutterPos=TRUE;
+   Histogram(-1,10000);
+   DETECTOR_1.DETShutterPos=FALSE;
+
+{ Define Sample conditions }
+   DETECTOR_1.DETShutterPos=FALSE;
+   SAMPLE_CHANGER.SMPPos=3;
+   DETECTION_FILTER.ACTPos=3;
+   EXCITATION_ATTENUATOR.ACTPos=4;
+   DETECTION_ATTENUATOR.ACTPos=40;
+for wl=480 to 580 step 50
+   DETECTION_MONO.MCRSC4Bandwidth=10E-9;
+   DETECTOR_1.DETShutterPos=TRUE;
+   DETECTION_MONO.MCRGratingWavelength=wl*1E-9;
+   Histogram(-1,10000);
+   DETECTOR_1.DETShutterPos=FALSE;
+end;
+
+
+end.

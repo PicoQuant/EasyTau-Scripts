@@ -1,0 +1,26 @@
+{ Script to perfom a decay of a single-exp-refernce-dye and a TRES of the laser around its emission maximum (IRF). After the decay measurement of the refernce sample open the lid and exchange the sample for a Ludox cuvette }
+
+def
+   wl : Float;
+
+exec
+   Sample="LDHXXX - Charazterization";
+   Solvent="Reeference Dye and Solvent used";
+
+{ Define Reference Sample conditions }
+
+   SAMPLE_CHANGER.SMPPos=1;
+   DETECTION_MONO.MCRGratingWavelength=525E-9;
+   DETECTOR_1.DETShutterPos=TRUE;
+   Histogram(-1,10000);
+
+{ Define TRES conditions for the IRF }
+
+   EXCITATION_ATTENUATOR.ACTPos=3;
+
+for wl=439.0 to 441 step 0.2
+   DETECTION_MONO.MCRGratingWavelength=wl*1E-9;
+   Histogram(-1,10000);
+end;
+
+end.
