@@ -1,0 +1,44 @@
+{This Script will do a TRES measurement integrating for a specific time at each wavelength}
+
+def
+   wl : Float;
+
+exec
+
+{Define Sample Name and Solvent}
+   Sample="Coumarin6";
+   Solvent="EtOH";
+
+{move to the sample cuvette}
+   SAMPLE_CHANGER.SMPPos=1;
+
+{set attenuators and polarizers}
+   EXCITATION_POLARIZER_LEFT.ACTPos=0;
+   EXCITATION_ATTENUATOR.ACTPos=4;
+   DETECTION_POLARIZER.ACTPos=54.7;
+   DETECTION_ATTENUATOR.ACTPos=12;
+
+
+for wl=500.0 to 600.0 step 0.2
+   DETECTION_MONO.MCRGratingWavelength=wl*1E-9;
+   {integration time 10s}
+   Histogram(10,-1);
+end;
+
+
+{move to the cuvette with the scattering medium}
+   SAMPLE_CHANGER.SMPPos=2;
+
+{set attenuators and polarizers}
+   EXCITATION_ATTENUATOR.ACTPos=3;
+   DETECTION_ATTENUATOR.ACTPos=12;
+
+{set emission wavelength of scattering sample}
+   DETECTION_MONO.MCRGratingWavelength=503E-9;
+
+{open shutter and measure until 10000 in the max}
+   DETECTOR_1.DETShutterPos=TRUE;
+   Histogram(-1,10000);
+
+
+end.

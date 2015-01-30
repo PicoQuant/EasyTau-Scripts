@@ -1,0 +1,73 @@
+{ Data aquisition for TRES with Xe flash lamp }
+
+{ block of variable definitions }
+def
+  StartWL : Float;
+  StopWL : Float;
+  DeltaWL : Float;
+  WL : Float;
+  i: Int;
+  TimePerPoint : Float;
+  Spectrum1: Curve; { Resulting time-gated Spectum}	
+  Spectrum2: Curve; { Resulting time-gated Spectum}	
+  TimeGate1First: Float;
+  TimeGate1Last: Float;
+  TimeGate2First: Float;
+  TimeGate2Last: Float;
+  ns: Float;
+  us: Float;
+  ms: Float;
+	
+{ program block }
+exec
+  { >> set the script aqusition parameters HERE << }
+  Sample="LaLa24";
+  Solvent="undefined";
+  StartWL=425; { in nm }
+  StopWL=650;
+  DeltaWL=0.5;
+  TimePerPoint=1; { in sec }
+  
+  ns = 1e-9;
+  us = 1e-6;
+  ms = 1e-3;
+  TimeGate1First  =  5 * ns;
+  TimeGate1Last   = 15 * ns;
+  TimeGate2First  = 15 * ns;
+  TimeGate2Last   = 25 * ns;
+
+  DETECTOR_1.DETShutterPos=FALSE;
+  EXCITATION_SHUTTER_RIGHT.ACTPos=2;
+  Spectrum1.NumPoints = ((StopWL - StartWL)/ DeltaWL) + 1;
+  Spectrum2.NumPoints = ((StopWL - StartWL)/ DeltaWL) + 1;
+  for i = 0 to Spectrum1.NumPoints - 1 step 1
+    Spectrum1.x[i] = StartWL + DeltaWL * i;
+    Spectrum1.y[i] = 0;
+    Spectrum1.Valid[i] = FALSE;
+
+    Spectrum2.x[i] = StartWL + DeltaWL * i;
+    Spectrum2.y[i] = 0;
+    Spectrum2.Valid[i] = FALSE;
+  end;
+  i = 0;
+  for WL=StartWL to StopWL step DeltaWL
+    DisplayStatus("Wavelength: " + WL + " nm (" + StartWL + " nm -> " + StopWL + " nm)");
+    DETECTION_MONO.MCRGratingWavelength=WL*1E-9; { in meter }
+    DETECTOR_1.DETShutterPos=TRUE;
+    Histogram(TimePerPoint,-1);
+    Spectrum1.y[i] = integral(crv[LastMeasCurveIndex] from TimeGate1First to TimeGate1Last);
+    Spectrum1.Valid[i] = TRUE;
+    Spectrum2.y[i] = integral(crv[LastMeasCurveIndex] from TimeGate2First to TimeGate2Last);
+    Spectrum2.Valid[i] = TRUE;
+
+    Spectrum1.y[i] = Spectrum1.y[i] / (crv[LastMeasCurveIndex].x[1] - crv[LastMeasCurveIndex].x[0] + 1e-30);
+    Spectrum2.y[i] = Spectrum2.y[i] / (crv[LastMeasCurveIndex].x[1] - crv[LastMeasCurveIndex].x[0] + 1e-30);
+    Plot(Spectrum1, 0); // second parameter = 0 for clearing the plot
+    Plot(Spectrum2, -1); // second parameter < 0 for redrawing the plot
+    i = i + 1;
+  end;
+  StoreAsSpectrum(Spectrum1);
+  StoreAsSpectrum(Spectrum2);
+  EXCITATION_SHUTTER_RIGHT.ACTPos=1;  	
+  DETECTOR_1.DETShutterPos=FALSE;
+end.
