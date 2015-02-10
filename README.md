@@ -5,6 +5,7 @@ This is a compilation of scripts for EasyTau the System software of the FT300 ma
 
  * ```Formulas Easy Tau.txt```   
  This document displays common formulas for EasyTau phaser plot, used to calculate several types of data (Corrected excitation and emission spectra, anisotropy, Quantum yields...).
+
  * ```IRF-TRES.txt```   
  This Script will measure a TCSPC histogram at a given wavelength and then a set of IRFs in a range of wavelengths. It is defined for a FT300 with a rotating sample holder.
 
