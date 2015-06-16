@@ -4,6 +4,8 @@ EasyTau-Scripts
 
 This is a compilation of scripts for EasyTau the System software of the FT300 made by PicoQuant (http://www.picoquant.com)
 
+This compilation is provided as is without any Support or warranties.
+
  * ``Formulas Easy Tau.txt``   
 This document displays common formulas for EasyTau phaser plot, used to calculate several types of data (Corrected excitation and emission spectra, anisotropy, Quantum yields...).
  * ``IRF-TRES.txt``  
