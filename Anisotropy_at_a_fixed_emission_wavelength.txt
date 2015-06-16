@@ -1,4 +1,4 @@
-{This script switches between VV and VH several times at a fixed wavelengh in order
+{This script switches between VV and VH several times at a fixed wavelength in order
  to calculate anisotropy and control fluorophore degradation. 
  The G factor must be calculated in a separate measurement.
  The script can be used with CW or pulsed excitation. 
