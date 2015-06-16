@@ -30,7 +30,7 @@ Script to perfom a decay of a single-exp-refernce-dye and a TRES of the laser ar
  * ``TRES_defined_integration_time.txt``  
  This Script will do a TRES measurement integrating for a specific time at each wavelength.
  
- * ``Anisotropy_at_a_fixed_emission_wavelength.txt``
+ * ``Anisotropy_at_a_fixed_emission_wavelength.txt``  
 This script switches between VV and VH several times at a fixed wavelength in order to calculate anisotropy and control fluorophore degradation. 
 The G factor must be calculated in a separate measurement.
 The script can be used with CW or pulsed excitation. In the latter case the decays can also be used to calculate time resolved anisotropy
