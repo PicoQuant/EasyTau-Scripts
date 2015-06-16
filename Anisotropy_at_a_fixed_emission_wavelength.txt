@@ -1,0 +1,63 @@
+{This script switches between VV and VH several times at a fixed wavelengh in order
+ to calculate anisotropy and control fluorophore degradation. 
+ The G factor must be calculated in a separate measurement.
+ The script can be used with CW or pulsed excitation. 
+ In the latter case the decays can also be used to calculate time resolved anisotropy}
+
+def
+  NumPoints: Int;
+  TimePerPoint: Int;
+  VTimeTrace: Curve;
+  HTimeTrace: Curve;
+  i: Int;
+exec
+
+  { >> set the script aqusition parameters HERE << }
+  
+  Sample="LaLa24";
+  Solvent="undefined";
+  NumPoints = 5; {Number of Toggles}
+  TimePerPoint=2; { in sec }
+  DETECTION_MONO.MCRGratingWavelength=500.0E-9;
+  DETECTION_MONO.MCRSC4Bandwidth=5E-9;
+  
+  { >> end of aquisition parameters << }
+
+  EXCITATION_POLARIZER_LEFT.ACTPos=0;
+
+  HTimeTrace.NumPoints = NumPoints;
+  VTimeTrace.NumPoints = NumPoints;
+  for i = 0 to NumPoints - 1 step 1
+    HTimeTrace.x[i] = i;
+    HTimeTrace.y[i] = 0;
+    HTimeTrace.Valid[i] = FALSE;
+    VTimeTrace.x[i] = i;
+    VTimeTrace.y[i] = 0;
+    VTimeTrace.Valid[i] = FALSE;
+  end;
+
+  DETECTOR_1.DETShutterPos = TRUE;
+  for i = 0 to NumPoints - 1 step 1
+    // H
+    DisplayStatus("Step " + (i + 1) + " of " + NumPoints + " H");
+    DETECTION_POLARIZER.ACTPos = 0;
+    Histogram(TimePerPoint,-1);
+    HTimeTrace.y[i] = integral(crv[LastMeasCurveIndex] from 0 to 1e100) / (crv[LastMeasCurveIndex].x[1] - crv[LastMeasCurveIndex].x[0] + 1e-30);
+    HTimeTrace.Valid[i] = TRUE;
+    //DeleteMeasCurve(LastMeasCurveIndex);
+    // V
+    DisplayStatus("Step " + (i + 1) + " of " + NumPoints + " V");
+    DETECTION_POLARIZER.ACTPos = 90;
+
+    Histogram(TimePerPoint,-1);
+    VTimeTrace.y[i] = integral(crv[LastMeasCurveIndex] from 0 to 1e100) / (crv[LastMeasCurveIndex].x[1] - crv[LastMeasCurveIndex].x[0] + 1e-30);
+    VTimeTrace.Valid[i] = TRUE;
+    // DeleteMeasCurve(LastMeasCurveIndex);
+    // Plotting
+    Plot(HTimeTrace, 0); // second parameter = 0 for clearing the plot
+    Plot(VTimeTrace, -1); // second parameter < 0 for redrawing the plot
+  end;
+    StoreAsSpectrum(HTimeTrace);
+    StoreAsSpectrum(VTimeTrace);
+  DETECTOR_1.DETShutterPos = FALSE;
+end.
