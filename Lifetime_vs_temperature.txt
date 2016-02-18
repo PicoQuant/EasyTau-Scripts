@@ -1,0 +1,163 @@
+{This Script will measure a TCSPC histogram at a given wavelength and then a set of IRFs in a range of wavelengths}
+
+def
+   wl : Float;
+
+exec
+
+{Define Sample Name and Solvent}
+   Sample="Gel";
+   Solvent="undefined";
+
+{Measurement starts with laser excitation and detector shutter closed}
+EXCITATION_ATTENUATOR.ACTPos=1;
+DETECTOR_1.DETShutterPos=FALSE;
+
+{--------------IRF----------------------------}
+{set conditions for the IRF}
+   SAMPLE_CHANGER.SMPPos=4;
+   DETECTION_MONO.MCRGratingWavelength=377E-9;
+   DETECTION_MONO.MCRSC4Bandwidth=5E-9;
+   DETECTION_ATTENUATOR.ACTPos=12;
+
+   EXCITATION_ATTENUATOR.ACTPos=2;
+   DETECTOR_1.DETShutterPos=TRUE;
+   Histogram(-1,10000);
+   DETECTOR_1.DETShutterPos=FALSE;
+   EXCITATION_ATTENUATOR.ACTPos=1;
+
+{--------------Samples----------------------------}
+
+   {set conditions for the sample}
+   SAMPLE_CHANGER.SMPPos=4;
+   DETECTION_MONO.MCRGratingWavelength=470E-9;
+   DETECTION_MONO.MCRSC4Bandwidth=10E-9;
+   EXCITATION_POLARIZER_LEFT.ACTPos=0;
+   DETECTION_POLARIZER.ACTPos=54.7;
+   DETECTION_ATTENUATOR.ACTPos=100;
+
+   {--------------0°C----------------------------}
+   SAMPLE_CHANGER.SMPTargetTemp=1;
+   Delay(10);
+
+   EXCITATION_ATTENUATOR.ACTPos=4;
+   DETECTOR_1.DETShutterPos=TRUE;
+   Histogram(-1,10000);
+   DETECTOR_1.DETShutterPos=FALSE;
+   EXCITATION_ATTENUATOR.ACTPos=1;
+
+  {--------------10°C----------------------------}
+   SAMPLE_CHANGER.SMPTargetTemp=10;
+   Delay(10);
+
+   EXCITATION_ATTENUATOR.ACTPos=4;
+   DETECTOR_1.DETShutterPos=TRUE;
+   Histogram(-1,10000);
+   DETECTOR_1.DETShutterPos=FALSE;
+   EXCITATION_ATTENUATOR.ACTPos=1;
+
+   {--------------20°C----------------------------}
+   SAMPLE_CHANGER.SMPTargetTemp=20;
+   Delay(10);
+
+   EXCITATION_ATTENUATOR.ACTPos=4;
+   DETECTOR_1.DETShutterPos=TRUE;
+   Histogram(-1,10000);
+   DETECTOR_1.DETShutterPos=FALSE;
+   EXCITATION_ATTENUATOR.ACTPos=1;
+
+   {--------------30°C----------------------------}
+   SAMPLE_CHANGER.SMPTargetTemp=1;
+   Delay(30);
+
+   EXCITATION_ATTENUATOR.ACTPos=4;
+   DETECTOR_1.DETShutterPos=TRUE;
+   Histogram(-1,10000);
+   DETECTOR_1.DETShutterPos=FALSE;
+   EXCITATION_ATTENUATOR.ACTPos=1;
+
+  {--------------40°C----------------------------}
+   SAMPLE_CHANGER.SMPTargetTemp=40;
+   Delay(10);
+
+   EXCITATION_ATTENUATOR.ACTPos=4;
+   DETECTOR_1.DETShutterPos=TRUE;
+   Histogram(-1,10000);
+   DETECTOR_1.DETShutterPos=FALSE;
+   EXCITATION_ATTENUATOR.ACTPos=1;
+
+   {--------------50°C----------------------------}
+   SAMPLE_CHANGER.SMPTargetTemp=50;
+   Delay(10);
+
+   EXCITATION_ATTENUATOR.ACTPos=4;
+   DETECTOR_1.DETShutterPos=TRUE;
+   Histogram(-1,10000);
+   DETECTOR_1.DETShutterPos=FALSE;
+   EXCITATION_ATTENUATOR.ACTPos=1;
+
+   {--------------60°C----------------------------}
+   SAMPLE_CHANGER.SMPTargetTemp=60;
+   Delay(10);
+
+   EXCITATION_ATTENUATOR.ACTPos=4;
+   DETECTOR_1.DETShutterPos=TRUE;
+   Histogram(-1,10000);
+   DETECTOR_1.DETShutterPos=FALSE;
+   EXCITATION_ATTENUATOR.ACTPos=1;
+
+  {--------------70°C----------------------------}
+   SAMPLE_CHANGER.SMPTargetTemp=70;
+   Delay(10);
+
+   EXCITATION_ATTENUATOR.ACTPos=4;
+   DETECTOR_1.DETShutterPos=TRUE;
+   Histogram(-1,10000);
+   DETECTOR_1.DETShutterPos=FALSE;
+   EXCITATION_ATTENUATOR.ACTPos=1;
+
+   {--------------80°C----------------------------}
+   SAMPLE_CHANGER.SMPTargetTemp=80;
+   Delay(10);
+
+   EXCITATION_ATTENUATOR.ACTPos=4;
+   DETECTOR_1.DETShutterPos=TRUE;
+   Histogram(-1,10000);
+   DETECTOR_1.DETShutterPos=FALSE;
+   EXCITATION_ATTENUATOR.ACTPos=1;
+
+  {--------------90°C----------------------------}
+   SAMPLE_CHANGER.SMPTargetTemp=90;
+   Delay(10);
+
+   EXCITATION_ATTENUATOR.ACTPos=4;
+   DETECTOR_1.DETShutterPos=TRUE;
+   Histogram(-1,10000);
+   DETECTOR_1.DETShutterPos=FALSE;
+   EXCITATION_ATTENUATOR.ACTPos=1;
+
+  {--------------50°C----------------------------}
+   SAMPLE_CHANGER.SMPTargetTemp=50;
+   Delay(10);
+
+   EXCITATION_ATTENUATOR.ACTPos=4;
+   DETECTOR_1.DETShutterPos=TRUE;
+   Histogram(-1,10000);
+   DETECTOR_1.DETShutterPos=FALSE;
+   EXCITATION_ATTENUATOR.ACTPos=1;
+
+  {--------------25°C----------------------------}
+   SAMPLE_CHANGER.SMPTargetTemp=25;
+   Delay(10);
+
+   EXCITATION_ATTENUATOR.ACTPos=4;
+   DETECTOR_1.DETShutterPos=TRUE;
+   Histogram(-1,10000);
+   DETECTOR_1.DETShutterPos=FALSE;
+   EXCITATION_ATTENUATOR.ACTPos=1;
+
+
+
+
+
+end.
