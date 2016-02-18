@@ -1,0 +1,52 @@
+{This Script will measure a TCSPC for different temperatures}
+
+def
+   temp : Float;
+exec
+
+{Define Sample Name and Solvent}
+   Sample="Gel Malaysa HPD06";
+   Solvent="<unspecified>";
+
+{Measurement starts with laser excitation and detector shutter closed}
+EXCITATION_ATTENUATOR.ACTPos=1;
+DETECTOR_1.DETShutterPos=FALSE;
+
+{--------------IRF----------------------------}
+{set conditions for the IRF}
+   SAMPLE_CHANGER.SMPPos=1;
+   DETECTION_MONO.MCRGratingWavelength=377E-9;
+   DETECTION_MONO.MCRSC4Bandwidth=5E-9;
+   DETECTION_ATTENUATOR.ACTPos=12;
+
+   EXCITATION_ATTENUATOR.ACTPos=2;
+   DETECTOR_1.DETShutterPos=TRUE;
+   Histogram(-1,10000);
+   DETECTOR_1.DETShutterPos=FALSE;
+   EXCITATION_ATTENUATOR.ACTPos=1;
+
+for temp=0 to 100 step 10
+
+   SAMPLE_CHANGER.SMPTargetTemp=temp;
+   Delay(3600);
+
+   SAMPLE_CHANGER.SMPPos=1;
+   DETECTION_MONO.MCRGratingWavelength=470E-9;
+   DETECTION_MONO.MCRSC4Bandwidth=10E-9;
+   EXCITATION_POLARIZER_LEFT.ACTPos=0;
+   DETECTION_POLARIZER.ACTPos=54.7;
+   DETECTION_ATTENUATOR.ACTPos=100;
+   EXCITATION_ATTENUATOR.ACTPos=5;
+   DETECTOR_1.DETShutterPos=TRUE;
+   Histogram(-1,10000);
+   DETECTION_MONO.MCRSC4Bandwidth=5E-9;
+   Spectrum(DETECTION_MONO.MCRGratingWavelength, 405, 660, 255, 0.1);
+   DETECTOR_1.DETShutterPos=FALSE;
+   EXCITATION_ATTENUATOR.ACTPos=1;
+
+end;
+
+
+SAMPLE_CHANGER.SMPTargetTemp=25;
+
+end.
