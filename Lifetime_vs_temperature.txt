@@ -1,4 +1,4 @@
-{This Script will measure a TCSPC histogram at a given wavelength and then a set of IRFs in a range of wavelengths}
+{This Script will measure a TCSPC histogram for different temperatures}
 
 def
    wl : Float;
@@ -36,7 +36,7 @@ DETECTOR_1.DETShutterPos=FALSE;
    DETECTION_POLARIZER.ACTPos=54.7;
    DETECTION_ATTENUATOR.ACTPos=100;
 
-   {--------------0캜----------------------------}
+   {--------------0째C----------------------------}
    SAMPLE_CHANGER.SMPTargetTemp=1;
    Delay(10);
 
@@ -46,7 +46,7 @@ DETECTOR_1.DETShutterPos=FALSE;
    DETECTOR_1.DETShutterPos=FALSE;
    EXCITATION_ATTENUATOR.ACTPos=1;
 
-  {--------------10캜----------------------------}
+  {--------------10째C----------------------------}
    SAMPLE_CHANGER.SMPTargetTemp=10;
    Delay(10);
 
@@ -56,7 +56,7 @@ DETECTOR_1.DETShutterPos=FALSE;
    DETECTOR_1.DETShutterPos=FALSE;
    EXCITATION_ATTENUATOR.ACTPos=1;
 
-   {--------------20캜----------------------------}
+   {--------------20째C----------------------------}
    SAMPLE_CHANGER.SMPTargetTemp=20;
    Delay(10);
 
@@ -66,7 +66,7 @@ DETECTOR_1.DETShutterPos=FALSE;
    DETECTOR_1.DETShutterPos=FALSE;
    EXCITATION_ATTENUATOR.ACTPos=1;
 
-   {--------------30캜----------------------------}
+   {--------------30째C----------------------------}
    SAMPLE_CHANGER.SMPTargetTemp=1;
    Delay(30);
 
@@ -76,7 +76,7 @@ DETECTOR_1.DETShutterPos=FALSE;
    DETECTOR_1.DETShutterPos=FALSE;
    EXCITATION_ATTENUATOR.ACTPos=1;
 
-  {--------------40캜----------------------------}
+  {--------------40째C----------------------------}
    SAMPLE_CHANGER.SMPTargetTemp=40;
    Delay(10);
 
@@ -86,7 +86,7 @@ DETECTOR_1.DETShutterPos=FALSE;
    DETECTOR_1.DETShutterPos=FALSE;
    EXCITATION_ATTENUATOR.ACTPos=1;
 
-   {--------------50캜----------------------------}
+   {--------------50째C----------------------------}
    SAMPLE_CHANGER.SMPTargetTemp=50;
    Delay(10);
 
@@ -96,7 +96,7 @@ DETECTOR_1.DETShutterPos=FALSE;
    DETECTOR_1.DETShutterPos=FALSE;
    EXCITATION_ATTENUATOR.ACTPos=1;
 
-   {--------------60캜----------------------------}
+   {--------------60째C----------------------------}
    SAMPLE_CHANGER.SMPTargetTemp=60;
    Delay(10);
 
@@ -106,7 +106,7 @@ DETECTOR_1.DETShutterPos=FALSE;
    DETECTOR_1.DETShutterPos=FALSE;
    EXCITATION_ATTENUATOR.ACTPos=1;
 
-  {--------------70캜----------------------------}
+  {--------------70째C----------------------------}
    SAMPLE_CHANGER.SMPTargetTemp=70;
    Delay(10);
 
@@ -116,7 +116,7 @@ DETECTOR_1.DETShutterPos=FALSE;
    DETECTOR_1.DETShutterPos=FALSE;
    EXCITATION_ATTENUATOR.ACTPos=1;
 
-   {--------------80캜----------------------------}
+   {--------------80째C----------------------------}
    SAMPLE_CHANGER.SMPTargetTemp=80;
    Delay(10);
 
@@ -126,7 +126,7 @@ DETECTOR_1.DETShutterPos=FALSE;
    DETECTOR_1.DETShutterPos=FALSE;
    EXCITATION_ATTENUATOR.ACTPos=1;
 
-  {--------------90캜----------------------------}
+  {--------------90째C----------------------------}
    SAMPLE_CHANGER.SMPTargetTemp=90;
    Delay(10);
 
@@ -136,7 +136,7 @@ DETECTOR_1.DETShutterPos=FALSE;
    DETECTOR_1.DETShutterPos=FALSE;
    EXCITATION_ATTENUATOR.ACTPos=1;
 
-  {--------------50캜----------------------------}
+  {--------------50째C----------------------------}
    SAMPLE_CHANGER.SMPTargetTemp=50;
    Delay(10);
 
@@ -146,7 +146,7 @@ DETECTOR_1.DETShutterPos=FALSE;
    DETECTOR_1.DETShutterPos=FALSE;
    EXCITATION_ATTENUATOR.ACTPos=1;
 
-  {--------------25캜----------------------------}
+  {--------------25째C----------------------------}
    SAMPLE_CHANGER.SMPTargetTemp=25;
    Delay(10);
 
